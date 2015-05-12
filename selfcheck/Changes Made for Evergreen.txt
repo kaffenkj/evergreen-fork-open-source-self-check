@@ -1,0 +1,37 @@
+Changes:
+
+**config.php: **
+
+	Added, line 80: $smtp_port=; //port for SMTP server (required if using, eg., SSL)
+
+**sip2.php**:
+
+	Line ~799: Forced function _check_crc to return true
+
+**Updated PHPMailer: https://github.com/Synchro/PHPMailer**
+
+**Added SSL port info to email_receipt.php**
+
+**account_check.php:**
+
+	Replaced (around line 47)
+	
+	if (strpos($patron_info['fixed']['PatronStatus'],'Y') !== false OR (!empty($patron_info['variable']['BL'][0]) && $patron_info['variable']['BL'][0]!='Y')){ //blocked or non-existent account?
+		session_regenerate_id();
+		session_destroy();
+		echo json_encode('blocked account');
+		exit;
+	}
+	
+	with
+
+	if (strpos($patron_info['fixed']['PatronStatus'],'Y') === 2) { //Evergreen doesn't have a recall feature, so ignore messages indicating that a recall notice is on patron's account
+		
+		} elseif (strpos($patron_info['fixed']['PatronStatus'],'Y') !== false OR (!empty($patron_info['variable']['BL'][0]) && $patron_info['variable']['BL'][0]!='Y')){ //blocked or non-existent account?
+			session_regenerate_id();
+			session_destroy();
+			echo json_encode('blocked account');
+			exit;
+		}
+
+	
