@@ -73,6 +73,7 @@ $due_date_format='n/j/Y'; //see http://php.net/manual/en/function.date.php for i
 $inactivity_timeout=40000; //time of inactivity before showing inactive prompt (in milliseconds)
 $account_check_timeout=15000; //time of inactivity after patron card scan before showing out of order page (in milliseconds)
 $patron_id_length=14; //length of patron barcode or other id (leave empty if this varies)
+$item_id_length=14; //length of item barcode (leave empty if this varies)
 $online_catalog_url=''; 	/*leave blank if you don't have one or if your catalog does
 							not allow renewals (this is for printing on the paper receipt and 
 							sending in the email receipt info about renewing online)*/
